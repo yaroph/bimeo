@@ -671,36 +671,24 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
 .ad-desc{ color:#bbb; font-size:14px; white-space:pre-wrap }
 
 
-/* --- tweak: ad skip bottom-right + 15% larger --- */
+/* --- ad skip: positioned bottom-right, slightly larger --- */
 .ad-overlay .ad-skip{
   left: auto !important;
   top: auto !important;
   right: 12px !important;
-  bottom: 12px !important;
+  bottom: 42px !important;
   transform: scale(1.15);
   transform-origin: bottom right;
 }
 
-
-/* --- tweak v3: ad skip +30px up and +15% bigger than v2 --- */
-.ad-overlay .ad-skip{
-  bottom: 42px !important; /* was 12px; now 12 + 30 */
-  transform: scale(1.3225) !important; /* 1.15 * 1.15 */
-  transform-origin: bottom right !important;
-}
-
-/* --- tweak v4: ad skip +30px up and +15% bigger (on top of v3) --- */
-.ad-overlay .ad-skip{
-  bottom: 72px !important; /* 12 + 30 + 30 */
-  transform: scale(1.520875) !important; /* 1.15 * 1.15 * 1.15 */
-  transform-origin: bottom right !important;
-}
-
-/* --- tweak v5: ad skip +30px more up and +15% bigger --- */
-.ad-overlay .ad-skip{
-  bottom: 102px !important;
-  transform: scale(1.520875 * 1.15) !important; /* ≈ 1.749 */
-  transform-origin: bottom right !important;
+@media (max-width: 760px){
+  .ad-overlay .ad-skip{
+    transform: scale(1) !important;
+    bottom: 12px !important;
+    right: 8px !important;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
 }
 
 
@@ -1107,9 +1095,12 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
   .topbar .right{
     gap:2px;
   }
-  .topbar .right .btn,
-  .topbar .right .orange{
+  .topbar .right .btn.orange{
     display:none;
+  }
+  .topbar .right .btn{
+    font-size:12px;
+    padding:6px 10px;
   }
   .topbar .right .icon-button,
   #profileBtn,
@@ -1321,9 +1312,12 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
   .topbar .right {
     gap: 2px;
   }
-  .topbar .right > .btn,
-  .topbar .right > .orange {
+  .topbar .right > .btn.orange {
     display: none;
+  }
+  .topbar .right > .btn {
+    font-size: 12px;
+    padding: 6px 10px;
   }
 
   /* Profile button must always be visible */

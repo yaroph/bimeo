@@ -1,6 +1,8 @@
 import { getStore } from '@netlify/blobs';
 
-const store = getStore('youvid-data');
+function getDataStore() {
+  return getStore('youvid-data');
+}
 
 const FILE_KEYS = ['ads', 'users', 'videos', 'comments', 'likes', 'views', 'subs', 'sponso'];
 const DEFAULTS = {
@@ -21,11 +23,13 @@ function isObject(val) {
 }
 
 async function readJsonKey(key, fallback) {
+  const store = getDataStore();
   const value = await store.get(key, { type: 'json' });
   return value === null || value === undefined ? (fallback ?? null) : value;
 }
 
 async function writeJsonKey(key, value) {
+  const store = getDataStore();
   await store.setJSON(key, value);
 }
 
