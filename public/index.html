@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BIMEO</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="left">
+      <button class="icon-button" id="menuBtn"><span class="material-symbols-rounded">menu</span></button>
+      <a class="brand" href="#/"><img src="assets/bimeo.png" alt="BIMEO" class="brand-logo"></a>
+    </div>
+    <div class="center">
+      <form id="searchForm" class="search">
+        <input id="searchInput" type="text" placeholder="Rechercher" />
+        <button type="submit" class="icon-button"><span class="material-symbols-rounded">search</span></button>
+      </form>
+    </div>
+    <div class="right" id="topbarRight"></div>
+  </header>
+
+  <div class="page">
+    <aside class="sidebar" id="sidebar">
+      <nav>
+        <a href="#/" class="nav-item"><span class="material-symbols-rounded">home</span>Accueil</a>
+        <a href="#/trending" class="nav-item"><span class="material-symbols-rounded">local_fire_department</span>Tendance</a>
+        <a href="#/podium" class="nav-item"><span class="material-symbols-rounded">emoji_events</span>Podium</a>
+        <a href="#/subs" class="nav-item" data-nav="subs"><span class="material-symbols-rounded">subscriptions</span>Abonnements</a>
+        <div class="sep"></div>
+        <a href="#/category/Video" class="nav-item"><span class="material-symbols-rounded">play_circle</span>Video</a>
+        <a href="#/category/Short" class="nav-item"><span class="material-symbols-rounded">bolt</span>Short</a>
+        <a href="#/category/News" class="nav-item"><span class="material-symbols-rounded">newsmode</span>News</a>
+        <a href="#/category/Fiction" class="nav-item"><span class="material-symbols-rounded">theaters</span>Fiction</a>
+        <a href="#/category/Musique" class="nav-item"><span class="material-symbols-rounded">music_note</span>Musique</a>
+      </nav>
+    </aside>
+    <main class="content" id="app"></main>
+  </div>
+
+  <dialog id="authModal" class="modal"></dialog>
+  <dialog id="postModal" class="modal"></dialog>
+  <dialog id="adsModal" class="modal"></dialog>
+  <dialog id="notifModal" class="modal"></dialog>
+
+  <template id="channelRowTemplate">
+  <article class="card channel-card">
+    <a class="avatar-link"><img class="avatar" alt="avatar"></a>
+    <div class="texts">
+      <a class="name"></a>
+      <div class="stats"></div>
+      <div class="desc"></div>
+    </div>
+    <div class="actions">
+      <a class="goto" title="Voir la chaîne"><span class="material-symbols-rounded">arrow_forward</span></a>
+    </div>
+  </article>
+</template>
+
+<template id="videoRowTemplate">
+  <article class="card video-row">
+    <a class="thumb-link"><img class="thumb" alt="miniature"></a>
+    <div class="texts">
+      <a class="title"></a>
+      <div class="meta-line">
+        <a class="chan"></a>
+        <span class="dot">•</span>
+        <span class="stats"></span>
+      </div>
+      <div class="desc"></div>
+      <div class="tags"></div>
+    </div>
+  </article>
+</template>
+
+<template id="videoCardTemplate">
+    <article class="card video-card">
+      <a class="thumb-link"><img class="thumb" alt="miniature"></a>
+      <div class="meta">
+        <img class="avatar" alt="avatar">
+        <div class="texts">
+          <a class="title"></a>
+          <a class="chan"></a>
+          <div class="stats"></div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

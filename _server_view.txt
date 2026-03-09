@@ -1,0 +1,56 @@
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const SAVE_DIR = path.join(__dirname, 'save');
+const STORE_FILE = path.join(SAVE_DIR, 'store.json');
+
+// Ensure save dir exists
+if (!fs.existsSync(SAVE_DIR)) fs.mkdirSync(SAVE_DIR, { recursive: true });
+if (!fs.existsSync(STORE_FILE)) {
+  fs.writeFileSync(STORE_FILE, JSON.stringify({
+    users: [], videos: [], comments: [], likes: {}, views: {}, subs: {}, notifications: {}
+  }, null, 2));
+}
+
+app.use(bodyParser.json({ limit: '2mb' }));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// tiny sync helpers
+function readStore() {
+  try { return JSON.parse(fs.readFileSync(STORE_FILE, 'utf-8')); } catch (e) { return {}; }
+}
+function writeStore(store) {
+  fs.writeFileSync(STORE_FILE, JSON.stringify(store, null, 2));
+}
+
+// API: get entire store or a key
+app.get('/api/store', (req, res) => {
+  res.json(readStore());
+});
+app.get('/api/get', (req, res) => {
+  const key = req.query.key;
+  const store = readStore();
+  res.json({ value: key ? store[key] : store });
+});
+// API: set a key
+app.post('/api/set', (req, res) => {
+  const { key, value } = req.body || {};
+  if (!key) return res.status(400).json({ error: 'key required' });
+  const store = readStore();
+  store[key] = value;
+  writeStore(store);
+  res.json({ ok: true });
+});
+
+// Health
+app.get('/api/health', (req, res) => res.json({ ok: true }));
+
+app.listen(PORT, () => {
+  console.log(`YouVid server running on http://localhost:${PORT}`);
+});

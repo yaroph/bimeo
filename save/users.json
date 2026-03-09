@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mq7y402giacmh9pql2g",
+    "nom": "Philip",
+    "prenom": "",
+    "pseudo": "2kliksphilip",
+    "tel": "",
+    "password": "demo",
+    "photo": "",
+    "header": ""
+  },
+  {
+    "id": "is8d5zsy3mh9pql2g",
+    "nom": "Sylvain",
+    "prenom": "",
+    "pseudo": "Sylvain Lye",
+    "tel": "",
+    "password": "demo",
+    "photo": "",
+    "header": ""
+  },
+  {
+    "id": "33ohlzs540amh9pql5u",
+    "nom": "",
+    "prenom": "",
+    "pseudo": "BNI",
+    "tel": "",
+    "password": "admin",
+    "photo": "https://i.goopics.net/mr15ba.png",
+    "header": "https://i.goopics.net/pyojhr.png",
+    "isAdmin": true,
+    "desc": "",
+    "handle": "BNI",
+    "iban": ""
+  },
+  {
+    "id": "ajnm2sm9cj7mh9q4tyq",
+    "photo": "",
+    "nom": "Triad ",
+    "prenom": "Records",
+    "pseudo": "Triad Records",
+    "tel": "",
+    "iban": "",
+    "password": "triadecords",
+    "createdAt": 1761605000882
+  },
+  {
+    "id": "8jmpsbzfknimh9q84j0",
+    "nom": "",
+    "prenom": "",
+    "pseudo": "admin",
+    "tel": "",
+    "password": "admin",
+    "photo": "",
+    "header": "",
+    "isAdmin": true
+  },
+  {
+    "id": "pgbudkvxv4fmh9qcd0r",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb11Uoub8Nwao3iJRYCuCzuce9Ls9mVcQlEA&s",
+    "nom": "Weazel",
+    "prenom": "News",
+    "pseudo": "Weazel News",
+    "tel": "",
+    "iban": "",
+    "password": "weazelnews",
+    "createdAt": 1761605352171,
+    "header": "https://pbs.twimg.com/media/E0G2cZBXIAsXsCb.jpg:large",
+    "desc": "",
+    "handle": "Weazel News"
+  },
+  {
+    "id": "pyodhmwizpomhc1eh01",
+    "photo": "https://i.goopics.net/7ci4ta.png",
+    "nom": "Steph",
+    "prenom": "Jobless",
+    "pseudo": "Jobless",
+    "tel": "",
+    "iban": "",
+    "password": "SJ1976",
+    "createdAt": 1761744858769,
+    "header": "https://img.gta5-mods.com/q75/images/elephant/c78fda-20170111032004_1.jpg",
+    "desc": "",
+    "handle": "@Jobless"
+  }
+]
