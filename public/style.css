@@ -1078,6 +1078,7 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
     min-width:0;
     height:auto !important;
     max-height:none !important;
+    min-height:calc(100vh - 56px);
     margin-top:16px;
   }
   .tabcontent{
@@ -1241,13 +1242,13 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
   .inline-actions{
     width:100%;
     display:flex;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     gap:8px;
   }
   .inline-actions .badge{
-    flex:1 1 calc(50% - 8px);
+    flex:0 1 auto;
     justify-content:center;
-    min-width:140px;
+    min-width:0;
   }
   .rightbox{
     border-radius:12px;
@@ -1270,5 +1271,245 @@ to   { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
   }
   .comments-count{
     font-size:18px;
+  }
+}
+
+
+/* ===========================================================
+   MOBILE RESPONSIVE FIXES
+   =========================================================== */
+
+/* Hide search back button by default (shown only on mobile when search is open) */
+.search .search-back {
+  display: none;
+}
+
+/* --- Search collapse & topbar at ≤980px (matches sidebar breakpoint) --- */
+@media (max-width: 980px) {
+  /* Collapse search to icon-only */
+  .search {
+    width: 44px !important;
+    min-width: 44px;
+    height: 40px;
+    border-radius: 999px;
+    border: 0 !important;
+    background: transparent !important;
+    overflow: visible;
+  }
+  .search input {
+    width: 0 !important;
+    min-width: 0;
+    padding: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .search button[type="submit"] {
+    width: 44px;
+    height: 44px;
+    border: 0 !important;
+    border-radius: 999px;
+    background: #222;
+  }
+  .search .search-back {
+    display: none;
+  }
+
+  /* Topbar layout tweaks */
+  .topbar .center {
+    flex: 0 0 auto !important;
+  }
+  .topbar .right {
+    gap: 2px;
+  }
+  .topbar .right > .btn,
+  .topbar .right > .orange {
+    display: none;
+  }
+
+  /* Profile button must always be visible */
+  #profileBtn {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  #profileBtn img {
+    display: block !important;
+  }
+
+  /* === Expanded search (body.search-open) === */
+  body.search-open .topbar .left,
+  body.search-open .topbar .right {
+    display: none !important;
+  }
+  body.search-open .topbar .center {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  body.search-open .search {
+    width: 100% !important;
+    flex: 1;
+    border: 1px solid #303030 !important;
+    border-radius: 24px;
+    background: var(--bg2) !important;
+    overflow: hidden;
+    display: flex !important;
+  }
+  body.search-open .search input {
+    width: auto !important;
+    flex: 1;
+    padding: 0 14px !important;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  body.search-open .search button[type="submit"] {
+    width: 56px;
+    border-left: 1px solid #303030 !important;
+    border-radius: 0;
+    background: #222;
+  }
+  body.search-open .search .search-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    min-width: 44px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    cursor: pointer;
+    flex: 0 0 auto;
+    padding: 0;
+  }
+
+  /* === Sidebar overlay fix === */
+  .sidebar {
+    position: fixed !important;
+    z-index: 200 !important;
+  }
+  body.sidebar-open::after {
+    content: "";
+    position: fixed;
+    inset: 56px 0 0 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 199;
+  }
+}
+
+/* --- YouTube-style 3-dot menu on comments --- */
+.yt-comment {
+  position: relative;
+}
+.yt-comment .comment-more {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.yt-comment:hover .comment-more,
+.yt-comment .comment-more:focus {
+  opacity: 1;
+}
+.yt-comment .comment-more:hover {
+  background: #272727;
+  color: #fff;
+}
+.yt-comment .comment-more .material-symbols-rounded {
+  font-size: 20px;
+}
+/* On touch devices, always show the 3-dot menu */
+@media (hover: none) {
+  .yt-comment .comment-more {
+    opacity: 0.7;
+  }
+}
+
+
+/* === Fix: ad-right-overlay full height in mobile === */
+@media (max-width: 900px) {
+  .rightbox.ad-has-overlay {
+    position: relative;
+    height: auto !important;
+    min-height: calc(100vh - 56px);
+  }
+  .rightbox.ad-has-overlay .ad-right-overlay {
+    position: absolute;
+    inset: 0;
+    min-height: 100%;
+    z-index: 40;
+  }
+}
+
+/* === Fix: J'aime / Je déteste / Diffuser — outlined pill style === */
+.inline-actions .badge#likeBtn,
+.inline-actions .badge#dislikeBtn,
+.inline-actions .badge#shareBtn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid #555;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.inline-actions .badge#likeBtn:hover,
+.inline-actions .badge#dislikeBtn:hover,
+.inline-actions .badge#shareBtn:hover {
+  background: #2a2a2a;
+}
+
+/* === Fix: Keep 3 action buttons on same line in mobile === */
+@media (max-width: 760px) {
+  .inline-actions {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px;
+    width: 100%;
+  }
+  .inline-actions .badge {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    font-size: 13px !important;
+    padding: 7px 10px !important;
+    white-space: nowrap;
+    justify-content: center;
+  }
+  .inline-actions .badge .material-symbols-rounded {
+    font-size: 18px;
+  }
+}
+
+/* === Fix: Poster une vidéo — mobile single column, pm-right on top === */
+@media (max-width: 760px) {
+  .pm-body {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 16px;
+  }
+  .pm-right {
+    min-width: 0 !important;
+    width: 100%;
+  }
+  .pm-left {
+    width: 100%;
   }
 }

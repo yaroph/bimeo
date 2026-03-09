@@ -1556,7 +1556,7 @@ try{
             // prevent preroll and show blocked image
             window.__noPreRoll = true;
             if(player){
-              player.innerHTML = '<img src="bloqué.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
+              player.innerHTML = '<img src="bloque.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
             }
           }else{
             // reload current view
@@ -3248,7 +3248,7 @@ try{
   if(v && v.blocked){
     const player = document.getElementById('player');
     if(player){
-      player.innerHTML = '<img src="bloqué.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
+      player.innerHTML = '<img src="bloque.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
     }
     // disable preroll
     window.__noPreRoll = true;
@@ -3485,7 +3485,7 @@ try{
 
 /* === Final responsive/mobile/comments patch === */
 (function(){
-  const MOBILE_BREAKPOINT = 760;
+  const MOBILE_BREAKPOINT = 980;
 
   function isMobileWidth(){
     return (window.innerWidth || document.documentElement.clientWidth || 0) <= MOBILE_BREAKPOINT;
@@ -3517,6 +3517,18 @@ try{
     const input = document.getElementById('searchInput');
     if(!form || form.dataset.mobileSearchPatched) return;
     form.dataset.mobileSearchPatched = '1';
+
+    // Add back button for mobile search expanded state
+    const backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.className = 'search-back';
+    backBtn.innerHTML = '<span class="material-symbols-rounded">arrow_back</span>';
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileSearch();
+    });
+    form.insertBefore(backBtn, form.firstChild);
 
     form.addEventListener('submit', (e)=>{
       if(isMobileWidth() && !document.body.classList.contains('search-open')){
@@ -3703,7 +3715,7 @@ __orig_viewVideo = function(id){
           bb.textContent = newBlocked ? 'débloquer' : 'bloquer';
           if(newBlocked && player){
             window.__noPreRoll = true;
-            player.innerHTML = '<img src="bloqué.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
+            player.innerHTML = '<img src="bloque.svg" alt="Vidéo bloquée" style="width:100%;height:100%;object-fit:contain">';
           }else{
             route();
           }
@@ -3880,7 +3892,8 @@ renderComments = function(videoId){
             <button class="comment-reply" type="button">Répondre</button>
             ${State.me && State.me.isAdmin ? '<button class="comment-delete-btn" type="button">Supprimer</button>' : ''}
           </div>
-        </div>`;
+        </div>
+        <button class="comment-more" type="button"><span class="material-symbols-rounded">more_vert</span></button>`;
 
       const img = row.querySelector('.comment-avatar');
       if(img){
