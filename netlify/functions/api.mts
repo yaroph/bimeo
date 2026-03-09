@@ -4,7 +4,7 @@ function getDataStore() {
   return getStore('youvid-data');
 }
 
-const FILE_KEYS = ['ads', 'users', 'videos', 'comments', 'likes', 'views', 'subs', 'sponso'];
+const FILE_KEYS = ['ads', 'users', 'videos', 'comments', 'likes', 'views', 'subs', 'sponso', 'autres'];
 const DEFAULTS = {
   ads: [],
   users: [],
@@ -122,7 +122,7 @@ async function readKey(key) {
     const fallback =
       key === 'users' || key === 'videos' || key === 'comments' || key === 'ads'
         ? []
-        : key === 'likes' || key === 'views' || key === 'subs'
+        : key === 'likes' || key === 'views' || key === 'subs' || key === 'sponso' || key === 'autres'
         ? {}
         : null;
     return await readJsonKey(key, fallback);
